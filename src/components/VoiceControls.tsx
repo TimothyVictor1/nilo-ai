@@ -28,12 +28,12 @@ const VoiceControls: React.FC<VoiceControlsProps> = ({
   };
 
   return (
-    <div className="flex items-center space-x-4 bg-white rounded-lg p-3 shadow-md border border-gray-200">
+    <div className="flex items-center space-x-4 backdrop-blur-md bg-white/20 rounded-xl p-4 shadow-lg border border-white/20">
       <Button
         size="icon"
         variant="ghost"
         onClick={onToggleMute}
-        className={muted ? "text-muted-foreground" : ""}
+        className={`text-primary hover:text-primary/80 hover:bg-white/10 ${muted ? "opacity-50" : ""}`}
       >
         {getVolumeIcon()}
       </Button>
@@ -46,7 +46,7 @@ const VoiceControls: React.FC<VoiceControlsProps> = ({
         onValueChange={handleVolumeChange}
         className={`w-32 ${muted ? "opacity-50" : ""}`}
       />
-      <span className="text-xs text-muted-foreground">
+      <span className="text-xs font-medium text-white px-2 py-1 rounded-md bg-primary/30">
         {Math.round(volume * 100)}%
       </span>
     </div>

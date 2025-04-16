@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import AvatarDisplay from '@/components/AvatarDisplay';
@@ -191,43 +190,38 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background-dark via-background to-background-light flex flex-col p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-radial from-purple-900 via-indigo-800 to-blue-900 flex flex-col p-4 md:p-8">
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1538370965046-79c0d6907d47?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')" }}></div>
       
-      <div className="w-full max-w-7xl mx-auto flex flex-col items-center relative z-10 mb-4">
-        <div className="flex flex-col md:flex-row items-center justify-center w-full gap-6">
-          {/* Avatar Section */}
-          <div className="avatar-spotlight">
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-30 rounded-full blur-lg animate-pulse-slow"></div>
-              <div className="relative z-10 w-32 h-32 md:w-40 md:h-40">
-                <AvatarDisplay speaking={isSpeaking} emotion={avatarEmotion} />
-              </div>
+      <div className="w-full max-w-7xl mx-auto flex flex-col items-center relative z-10 mb-8">
+        <div className="avatar-spotlight mb-6">
+          <div className="relative">
+            <div className="absolute -inset-4 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-30 rounded-full blur-lg animate-pulse-slow"></div>
+            <div className="relative z-10 w-40 h-40 md:w-48 md:h-48">
+              <AvatarDisplay speaking={isSpeaking} emotion={avatarEmotion} />
             </div>
           </div>
-          
-          {/* Title and Description Section */}
-          <div className="flex flex-col items-center md:items-start">
-            <h1 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 filter drop-shadow-sm">
-              Nilo AI
-            </h1>
-            <p className="text-center md:text-left text-white/90 mt-2 text-xl max-w-2xl font-light">
-              AI-powered Virtual Assistant for any industry
-            </p>
-            
-            {/* Voice Controls directly below the title in one line */}
-            <VoiceControls
-              volume={volume}
-              onVolumeChange={setVolume}
-              muted={muted}
-              onToggleMute={() => setMuted(!muted)}
-              className="mt-4 backdrop-blur-lg bg-white/10 rounded-full"
-            />
-          </div>
         </div>
+        
+        <header className="text-center mb-4">
+          <h1 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 filter drop-shadow-sm">
+            Nilo AI
+          </h1>
+          <p className="text-center text-white/90 mt-2 text-xl max-w-2xl mx-auto font-light">
+            AI-powered Virtual Assistant for any industry
+          </p>
+        </header>
+        
+        <VoiceControls
+          volume={volume}
+          onVolumeChange={setVolume}
+          muted={muted}
+          onToggleMute={() => setMuted(!muted)}
+          className="mt-4 mb-8 backdrop-blur-lg bg-white/10 rounded-full"
+        />
       </div>
       
-      <main className="flex-1 flex flex-col gap-6 max-w-6xl mx-auto w-full relative z-10">
+      <main className="flex-1 flex flex-col gap-8 max-w-6xl mx-auto w-full relative z-10">
         <IndustrySelector 
           selectedIndustry={selectedIndustry} 
           onSelectIndustry={handleIndustryChange} 

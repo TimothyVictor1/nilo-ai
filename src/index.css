@@ -106,7 +106,7 @@
   }
   
   .avatar-container:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.03);
     box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.7);
   }
   
@@ -144,6 +144,25 @@
     animation: float 5s ease-in-out infinite;
   }
   
+  .avatar-spotlight::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    z-index: -1;
+    background: radial-gradient(
+      circle at center,
+      rgba(111, 76, 255, 0.4) 0%,
+      rgba(111, 76, 255, 0) 70%
+    );
+  }
+
+  .avatar-spotlight {
+    position: relative;
+  }
+  
   .touch-action-manipulation {
     touch-action: manipulation;
   }
@@ -171,5 +190,28 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-image: linear-gradient(90deg, #4b6cb7, #6366f1);
+  }
+
+  .animate-ripple {
+    animation: ripple 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: scale(0.95);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.05);
+      opacity: 0;
+    }
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(circle at center, var(--tw-gradient-from) 0%, var(--tw-gradient-via) 50%, var(--tw-gradient-to) 100%);
   }
 }

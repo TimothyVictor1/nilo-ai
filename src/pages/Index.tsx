@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import AvatarDisplay from '@/components/AvatarDisplay';
@@ -191,17 +190,36 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-blue-800 to-purple-900 flex flex-col p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-radial from-purple-900 via-indigo-800 to-blue-900 flex flex-col p-4 md:p-8">
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1538370965046-79c0d6907d47?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')" }}></div>
       
-      <header className="w-full mb-8 relative z-10">
-        <h1 className="text-4xl md:text-5xl font-bold text-center text-gradient">
-          Nilo AI
-        </h1>
-        <p className="text-center text-white/90 mt-2 text-lg">
-          Your AI-powered virtual assistant for {selectedIndustry} support
-        </p>
-      </header>
+      <div className="w-full max-w-7xl mx-auto flex flex-col items-center relative z-10 mb-8">
+        <div className="avatar-spotlight mb-6">
+          <div className="relative">
+            <div className="absolute -inset-4 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-30 rounded-full blur-lg animate-pulse-slow"></div>
+            <div className="relative z-10 w-40 h-40 md:w-48 md:h-48">
+              <AvatarDisplay speaking={isSpeaking} emotion={avatarEmotion} />
+            </div>
+          </div>
+        </div>
+        
+        <header className="text-center mb-4">
+          <h1 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 filter drop-shadow-sm">
+            Nilo AI
+          </h1>
+          <p className="text-center text-white/90 mt-2 text-xl max-w-2xl mx-auto font-light">
+            AI-powered Virtual Assistant for any industry
+          </p>
+        </header>
+        
+        <VoiceControls
+          volume={volume}
+          onVolumeChange={setVolume}
+          muted={muted}
+          onToggleMute={() => setMuted(!muted)}
+          className="mt-4 mb-8 backdrop-blur-lg bg-white/10 rounded-full"
+        />
+      </div>
       
       <main className="flex-1 flex flex-col gap-8 max-w-6xl mx-auto w-full relative z-10">
         <IndustrySelector 
@@ -209,27 +227,10 @@ const Index = () => {
           onSelectIndustry={handleIndustryChange} 
         />
         
-        <div className="grid md:grid-cols-3 gap-8 flex-1">
-          <div className="md:col-span-1 flex flex-col gap-6">
-            <Card className="flex-1 bg-gradient-card border border-white/20">
-              <CardContent className="p-6 flex items-center justify-center">
-                <div className="floating">
-                  <AvatarDisplay speaking={isSpeaking} emotion={avatarEmotion} />
-                </div>
-              </CardContent>
-            </Card>
-            
-            <VoiceControls
-              volume={volume}
-              onVolumeChange={setVolume}
-              muted={muted}
-              onToggleMute={() => setMuted(!muted)}
-            />
-          </div>
-          
-          <div className="md:col-span-2 flex flex-col gap-6">
+        <Card className="bg-gradient-to-br from-white/10 to-white/5 border border-white/20 backdrop-blur-md overflow-hidden shadow-xl">
+          <CardContent className="p-6">
             <Tabs defaultValue="chat" className="flex-1 flex flex-col">
-              <TabsList className="self-center mb-4 bg-white/10 backdrop-blur-sm">
+              <TabsList className="self-center mb-6 bg-white/10 backdrop-blur-sm">
                 <TabsTrigger 
                   value="chat" 
                   className="data-[state=active]:bg-primary data-[state=active]:text-white"
@@ -255,73 +256,71 @@ const Index = () => {
               </TabsContent>
               
               <TabsContent value="info" className="flex-1 h-[400px] md:h-[500px] overflow-auto">
-                <Card className="bg-gradient-card border border-white/20">
-                  <CardContent className="p-6">
-                    <h2 className="text-xl font-bold mb-4 text-white">
-                      About <span className="text-gradient">{selectedIndustry.charAt(0).toUpperCase() + selectedIndustry.slice(1)}</span> Assistant
-                    </h2>
-                    
-                    {selectedIndustry === 'hr' && (
-                      <>
-                        <p className="mb-4 text-white/90">Nilo AI HR Assistant can help with:</p>
-                        <ul className="list-disc pl-6 space-y-2 text-white/80">
-                          <li>Leave and vacation requests</li>
-                          <li>Onboarding information</li>
-                          <li>Company policies and procedures</li>
-                          <li>Benefits and compensation inquiries</li>
-                          <li>Training and development resources</li>
-                        </ul>
-                      </>
-                    )}
-                    
-                    {selectedIndustry === 'healthcare' && (
-                      <>
-                        <p className="mb-4 text-white/90">Nilo AI Healthcare Assistant can help with:</p>
-                        <ul className="list-disc pl-6 space-y-2 text-white/80">
-                          <li>Appointment scheduling</li>
-                          <li>Medical service information</li>
-                          <li>Insurance and billing inquiries</li>
-                          <li>Facility directions and hours</li>
-                          <li>General health information</li>
-                        </ul>
-                      </>
-                    )}
-                    
-                    {selectedIndustry === 'airport' && (
-                      <>
-                        <p className="mb-4 text-white/90">Nilo AI Airport Assistant can help with:</p>
-                        <ul className="list-disc pl-6 space-y-2 text-white/80">
-                          <li>Flight status and gate information</li>
-                          <li>Airport navigation and directions</li>
-                          <li>Security checkpoint information</li>
-                          <li>Baggage claim and lost item assistance</li>
-                          <li>Airport services and amenities</li>
-                        </ul>
-                      </>
-                    )}
-                    
-                    {selectedIndustry === 'general' && (
-                      <>
-                        <p className="mb-4 text-white/90">Nilo AI General Assistant can help with:</p>
-                        <ul className="list-disc pl-6 space-y-2 text-white/80">
-                          <li>General information and inquiries</li>
-                          <li>Directions and guidance</li>
-                          <li>Recommendations and suggestions</li>
-                          <li>Basic explanations on various topics</li>
-                          <li>Connecting you to specialized assistance</li>
-                        </ul>
-                      </>
-                    )}
-                    
-                    <p className="mt-6 text-sm text-white/60">
-                      This is a demonstration of Nilo AI, an AI-powered virtual assistant. In a production environment, it would be connected to real systems and APIs to provide accurate, real-time information.
-                    </p>
-                  </CardContent>
-                </Card>
+                <div className="bg-white/5 backdrop-blur-md rounded-lg p-6 border border-white/10">
+                  <h2 className="text-xl font-bold mb-4 text-white">
+                    About <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-300">{selectedIndustry.charAt(0).toUpperCase() + selectedIndustry.slice(1)}</span> Assistant
+                  </h2>
+                  
+                  {selectedIndustry === 'hr' && (
+                    <>
+                      <p className="mb-4 text-white/90">Nilo AI HR Assistant can help with:</p>
+                      <ul className="list-disc pl-6 space-y-2 text-white/80">
+                        <li>Leave and vacation requests</li>
+                        <li>Onboarding information</li>
+                        <li>Company policies and procedures</li>
+                        <li>Benefits and compensation inquiries</li>
+                        <li>Training and development resources</li>
+                      </ul>
+                    </>
+                  )}
+                  
+                  {selectedIndustry === 'healthcare' && (
+                    <>
+                      <p className="mb-4 text-white/90">Nilo AI Healthcare Assistant can help with:</p>
+                      <ul className="list-disc pl-6 space-y-2 text-white/80">
+                        <li>Appointment scheduling</li>
+                        <li>Medical service information</li>
+                        <li>Insurance and billing inquiries</li>
+                        <li>Facility directions and hours</li>
+                        <li>General health information</li>
+                      </ul>
+                    </>
+                  )}
+                  
+                  {selectedIndustry === 'airport' && (
+                    <>
+                      <p className="mb-4 text-white/90">Nilo AI Airport Assistant can help with:</p>
+                      <ul className="list-disc pl-6 space-y-2 text-white/80">
+                        <li>Flight status and gate information</li>
+                        <li>Airport navigation and directions</li>
+                        <li>Security checkpoint information</li>
+                        <li>Baggage claim and lost item assistance</li>
+                        <li>Airport services and amenities</li>
+                      </ul>
+                    </>
+                  )}
+                  
+                  {selectedIndustry === 'general' && (
+                    <>
+                      <p className="mb-4 text-white/90">Nilo AI General Assistant can help with:</p>
+                      <ul className="list-disc pl-6 space-y-2 text-white/80">
+                        <li>General information and inquiries</li>
+                        <li>Directions and guidance</li>
+                        <li>Recommendations and suggestions</li>
+                        <li>Basic explanations on various topics</li>
+                        <li>Connecting you to specialized assistance</li>
+                      </ul>
+                    </>
+                  )}
+                  
+                  <p className="mt-6 text-sm text-white/60">
+                    This is a demonstration of Nilo AI, an AI-powered virtual assistant. In a production environment, it would be connected to real systems and APIs to provide accurate, real-time information.
+                  </p>
+                </div>
               </TabsContent>
             </Tabs>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </main>
       
       <footer className="mt-8 text-center text-white/50 text-sm relative z-10">

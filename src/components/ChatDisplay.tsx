@@ -29,12 +29,12 @@ const ChatDisplay: React.FC<ChatDisplayProps> = ({ messages }) => {
   }, [messages]);
 
   return (
-    <div ref={scrollAreaRef} className="w-full h-full bg-white rounded-lg shadow-md border border-gray-200">
+    <div ref={scrollAreaRef} className="w-full h-full bg-white rounded-lg shadow-lg border border-gray-200">
       <ScrollArea className="h-full p-4">
         <div className="space-y-4">
           {messages.length === 0 ? (
             <div className="flex items-center justify-center h-full py-10">
-              <p className="text-assistant-text/50 text-center">
+              <p className="text-gray-500 text-center">
                 No messages yet. Start a conversation!
               </p>
             </div>
@@ -47,12 +47,12 @@ const ChatDisplay: React.FC<ChatDisplayProps> = ({ messages }) => {
                 <div
                   className={`flex gap-3 max-w-[80%] ${
                     message.role === 'assistant'
-                      ? 'bg-assistant-accent/50 text-assistant-text'
-                      : 'bg-assistant-primary text-white'
+                      ? 'bg-blue-50 text-gray-800'
+                      : 'bg-primary text-white'
                   } p-3 rounded-lg animate-slide-up`}
                 >
                   {message.role === 'assistant' && (
-                    <Avatar className="h-8 w-8 bg-assistant-primary text-white">
+                    <Avatar className="h-8 w-8 bg-primary text-white">
                       <AvatarFallback>
                         <Bot className="h-5 w-5" />
                       </AvatarFallback>

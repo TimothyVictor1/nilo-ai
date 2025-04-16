@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { Bot, CircleUser, Sparkles } from 'lucide-react';
+import { Bot, Sparkles } from 'lucide-react';
 
 interface AvatarDisplayProps {
   speaking: boolean;

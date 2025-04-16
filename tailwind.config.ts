@@ -20,7 +20,7 @@ export default {
     },
     extend: {
       colors: {
-        // Enhanced color palette
+        // Enhanced color palette with better contrast
         primary: {
           DEFAULT: '#6366f1', // Indigo
           light: '#a5b4fc',
@@ -39,6 +39,11 @@ export default {
         text: {
           DEFAULT: '#f8fafc', // Light text
           muted: '#94a3b8'
+        },
+        assistant: {
+          primary: '#6366f1', // Matches primary indigo
+          accent: '#e2e8f0', // Light slate
+          text: '#1e293b', // Dark slate for text
         }
       },
       backgroundImage: {
@@ -53,6 +58,8 @@ export default {
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'gradient-shift': 'gradient-shift 5s ease infinite',
+        'ripple': 'ripple 1.5s cubic-bezier(0, 0.2, 0.8, 1) infinite',
+        'slide-up': 'slide-up 0.3s ease-out forwards',
       },
       keyframes: {
         'gradient-shift': {
@@ -62,10 +69,29 @@ export default {
           '50%': { 
             'background-position': '100% 50%'
           }
+        },
+        'ripple': {
+          '0%': {
+            'transform': 'scale(0.8)',
+            'opacity': '1'
+          },
+          '100%': {
+            'transform': 'scale(1.2)',
+            'opacity': '0'
+          }
+        },
+        'slide-up': {
+          '0%': {
+            'transform': 'translateY(10px)',
+            'opacity': '0'
+          },
+          '100%': {
+            'transform': 'translateY(0)',
+            'opacity': '1'
+          }
         }
       }
     }
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
-
